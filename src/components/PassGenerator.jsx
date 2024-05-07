@@ -8,6 +8,7 @@ import {
   nums,
   uniqueSymbols,
 } from "../utils/utils";
+import "../index.css";
 
 export const PassGenerator = () => {
   const [password, setPassword] = useState("");
@@ -34,6 +35,19 @@ export const PassGenerator = () => {
 
     if (symbols) {
       charList += uniqueSymbols;
+    }
+
+    if (charList.length === 0) {
+      toast.error("Please select atleast one option", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
     setPassword(randomPasswords(charList));
@@ -67,26 +81,26 @@ export const PassGenerator = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-[50%] m-auto mt-24">
+    <div className="flex flex-col justify-center items-center w-[500px] h-[600px] m-auto mt-12 bg-[#fff] shadow-3xl rounded-lg">
       <div>
         <h1 className="text-3xl font-bold pb-6">Password Generator</h1>
       </div>
 
-      <div className="w-[50%] text-xl font-semibold">
-        <div className="flex   pb-6">
-          <h2 className=" w-full border-black border-2">{password}</h2>
+      <div className="w-[90%] ">
+        <div className="flex mb-6 p-2 border-black border-2">
+          <h2 className=" w-full font-semibold">{password}</h2>
           <FaCopy
             className="h-8 w-6 cursor-pointer"
             onClick={handleCopyPassword}
           />
         </div>
 
-        <p className="text-sm text-center pb-5">
+        <p className="text-sm text-center pb-5 italic font-medium">
           Select Password Length between (8 - 50 Characters){" "}
         </p>
 
         <div className="flex justify-between pb-6">
-          <span>Password Length</span>
+          <span className="text-xl font-bold">Password Length</span>
           <input
             type="number"
             min={8}
@@ -97,7 +111,7 @@ export const PassGenerator = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 font-semibold">
           <div className="flex justify-between">
             <label htmlFor="">Include Upper Case</label>
             <input
