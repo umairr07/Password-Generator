@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaCopy } from "react-icons/fa";
+import { FaRegCopy } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -50,6 +50,21 @@ export const PassGenerator = () => {
       });
     }
 
+    if (passLength < 8 || passLength > 50) {
+      toast.error("Password length should be between 8 and 50", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      return;
+    }
+
     setPassword(randomPasswords(charList));
   };
 
@@ -78,6 +93,19 @@ export const PassGenerator = () => {
         theme: "light",
       });
     }
+
+    if (password === "") {
+      toast.warn("Please Generate Password", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
@@ -89,8 +117,8 @@ export const PassGenerator = () => {
       <div className="w-[90%] ">
         <div className="flex mb-6 p-2 border-black border-2">
           <h2 className=" w-full font-semibold">{password}</h2>
-          <FaCopy
-            className="h-8 w-6 cursor-pointer"
+          <FaRegCopy
+            className="h-8 w-6 cursor-pointer  "
             onClick={handleCopyPassword}
           />
         </div>
